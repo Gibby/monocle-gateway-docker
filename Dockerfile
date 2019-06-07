@@ -21,7 +21,7 @@
 # ---------------------------------------
 # Start with the base Alpine Linux image
 # ---------------------------------------
-FROM alpine:latest
+FROM ubuntu
 WORKDIR /root
 
 # ---------------------------------------
@@ -50,13 +50,12 @@ RUN mkdir -p /etc/monocle
 # Install Monocle Gateway dependencies
 # and other useful utilties
 # ---------------------------------------
-RUN apk update &&      \
-    apk add --no-cache \
+RUN apt-get update &&      \
+    apt-get install -y \
     wget               \
     curl               \
-    libstdc++          \
-    nano               \
     net-tools          \
+    libcap2-bin        \
     openssl            \
     ca-certificates
 
