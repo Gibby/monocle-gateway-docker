@@ -21,7 +21,7 @@
 # ---------------------------------------
 # Start with the base Alpine Linux image
 # ---------------------------------------
-FROM ubuntu
+FROM alpine
 WORKDIR /root
 
 # ---------------------------------------
@@ -50,12 +50,13 @@ RUN mkdir -p /etc/monocle
 # Install Monocle Gateway dependencies
 # and other useful utilties
 # ---------------------------------------
-RUN apt-get update &&      \
-    apt-get install -y \
+RUN apk update &&      \
+    apk add --no-cache \
     wget               \
     curl               \
+    libstdc++          \
+    nano               \
     net-tools          \
-    libcap2-bin        \
     openssl            \
     ca-certificates
 
@@ -70,7 +71,7 @@ RUN apt-get update &&      \
 # Remove the downloaded Monocle Gateway
 # archive files
 # ---------------------------------------
-COPY monocle-gateway-linux-x64-v0.0.4.tar.gz /root/monocle-gateway.tar.gz
+COPY monocle-gateway-alpine-x64-v0.0.4.tar.gz /root/monocle-gateway.tar.gz
 RUN cd /usr/local/bin/ && \
     tar xvzf /root/monocle-gateway.tar.gz monocle-gateway && \
     tar xvzf /root/monocle-gateway.tar.gz monocle-proxy  && \
