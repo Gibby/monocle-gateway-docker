@@ -44,7 +44,10 @@ LABEL version=$BUILD_VERSION
 # Create Monocle Gateway configuration
 # directory
 # ---------------------------------------
-RUN mkdir -p /etc/monocle
+#
+# This is not required and breaks some other options like using a mount via kubernetes secrets
+#
+#RUN mkdir -p /etc/monocle
 
 # ---------------------------------------
 # Install Monocle Gateway dependencies
